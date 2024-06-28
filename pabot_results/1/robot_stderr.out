@@ -1,0 +1,3 @@
+[ WARN ] Imported library 'C:\Users\Priti\Desktop\SI\wm-indexnine-qa-automation\Mobile\Android\KC\PageObjects\Login\login_locators.py' contains no keywords.
+[ WARN ] Keyword 'Capture Page Screenshot' could not be run on failure: No application is open
+[ WARN ] Keyword 'Capture Page Screenshot' could not be run on failure: No application is open

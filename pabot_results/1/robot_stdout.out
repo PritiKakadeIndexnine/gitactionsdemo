@@ -1,0 +1,25 @@
+
+12:36:12 [browserstack_sdk.__init__][INFO] - Using App : bs://9445f8af29ed4385b9731793c86bbaf6ed86558b.
+
+12:36:12 [browserstack_sdk.__init__][INFO] - Project and debug logs are captured by default. To disable, set disableAutoCaptureLogs: true in config.
+
+12:36:18 [browserstack_sdk.__init__][INFO] - Setting up for Browserstack, using framework: robot
+==============================================================================
+Already Registered User Test                                                  
+==============================================================================
+TC-09 Verify the UI of the layout of OTP screen                       | FAIL |
+Setup failed:
+WebDriverException: Message: [BROWSERSTACK_MISSING_CAPS] The ["platformName"] capabilities are missing in your test script. Please refer to our capability builder - https://www.browserstack.com/app-automate/capabilities?tag=w3c
+
+
+Also teardown failed:
+No application is open
+------------------------------------------------------------------------------
+Already Registered User Test                                          | FAIL |
+1 test, 0 passed, 1 failed
+==============================================================================
+Output:  C:\Users\Priti\Desktop\SI\wm-indexnine-qa-automation\pabot_results\1\output.xml
+
+12:36:44 [browserstack_sdk.__init__][INFO] - Handling session close
+
+12:36:44 [browserstack_sdk.__init__][INFO] - All done!

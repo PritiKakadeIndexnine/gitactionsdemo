@@ -1,0 +1,28 @@
+# Use budtmo's Android emulator image as the base image
+FROM budtmo/docker-android:emulator_13.0
+
+# Install additional dependencies if required
+USER root
+RUN apt-get update && apt-get install -y \
+    wget \
+    unzip \
+    git \
+    curl \
+    build-essential
+
+# Set the environment variables (if needed)
+ENV ANDROID_HOME /opt/android-sdk-linux
+ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+
+# Copy your Android project into the Docker container
+COPY . /workspace
+WORKDIR /workspace
+
+# Ensure gradlew is executable
+RUN chmod +x gradlew
+
+# Start the emulator and run tests in a single command
+CMD /opt/start-emulator.sh && \
+    adb wait-for-device && \
+    ./gradlew connectedAndroidTest && \
+    ./robot Mobile/Android/KC/TestCases/Login/already_registered_user_test.robot

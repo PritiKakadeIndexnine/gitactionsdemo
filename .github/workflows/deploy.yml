@@ -2,7 +2,7 @@ name: Build, Push Docker image to ECR, and Update ECS
 
 on:
   push:
-    branches: [ main ]
+    branches: [ git-actions-demo ]
 
 jobs:
   build-and-deploy:

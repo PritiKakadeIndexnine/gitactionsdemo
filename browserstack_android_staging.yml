@@ -21,7 +21,7 @@ platforms:
 
 projectName: wm-indexnine-qa-automation
 buildIdentifier: V99.99
-buildName: staging
+buildName: staging1
 buildTag: reg
 parallelsPerPlatform: 1
 CUSTOM_TAG_1: "Test"

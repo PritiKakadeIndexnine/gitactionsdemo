@@ -26,6 +26,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Verify DockerHub login
+        run: |
+          echo "Logged in as:"
+          docker info --format '{{json .}}' | jq -r '.IndexServerAddress'
+
       - name: Build Docker images
         run: |
           environments="qa staging prod"

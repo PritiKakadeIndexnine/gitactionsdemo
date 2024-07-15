@@ -54,8 +54,8 @@ jobs:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
           ECR_REPOSITORY: demo
           IMAGE_TAG: ${{ github.sha }}
-          ECS_CLUSTER_NAME: upload_ECS
-          ECS_SERVICE_NAME: web-service1
+          ECS_CLUSTER_NAME: upload_image
+          ECS_SERVICE_NAME: new-service1
         run: |
           echo "Updating ECS service with image $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
           aws ecs update-service --cluster $ECS_CLUSTER_NAME --service $ECS_SERVICE_NAME --force-new-deployment --region $AWS_REGION                                             

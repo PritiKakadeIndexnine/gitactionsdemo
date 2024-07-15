@@ -3,10 +3,7 @@ name: Build and Run Dockerfiles
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - git-actions-demo
 
 jobs:
   build-and-run:

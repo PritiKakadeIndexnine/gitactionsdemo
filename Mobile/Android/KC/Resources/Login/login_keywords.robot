@@ -31,7 +31,7 @@ Open KC application
     ${env_data}  Get Environment Data    ${android_environment}
     ${env_data}  Create Dictionary  &{env_data}
     #Open Application    ${env_data.host}    platformName=${env_data.platformName}   deviceName=${env_data.deviceName}   app=${env_data.application_sdk}      autoGrantPermissions=true    automationName=${env_data.automationName}    noReset=true
-    Open Application    ${REMOTE_URL}       name=single_test    build=${APP_PACKAGE}    platformName=${PLATFORM_NAME}    browserstack.idleTimeout : "300"
+    Open Application    ${REMOTE_URL}       name=single_test    build=${APP_PACKAGE}    platformName=${PLATFORM_NAME}
 
 Verify Login Screen
     AppiumLibrary.Wait Until Element Is Visible   ${login_view}   timeout=120

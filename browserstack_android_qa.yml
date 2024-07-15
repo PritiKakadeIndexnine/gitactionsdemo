@@ -21,7 +21,7 @@ platforms:
 
 projectName: wm-indexnine-qa-automation
 buildIdentifier: V99.99
-buildName: qa
+buildName: qa1
 buildTag: reg
 parallelsPerPlatform: 1
 CUSTOM_TAG_1: "Test"

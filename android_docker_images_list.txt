@@ -1,0 +1,1 @@
+list=[android_qa_image, android_staging_image, android_prod_image] 

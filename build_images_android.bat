@@ -3,8 +3,8 @@ setlocal enabledelayedexpansion
 
 
 :: Define BrowserStack credentials
-set BROWSERSTACK_USERNAME=pritikakade_PBIw6A
-set BROWSERSTACK_ACCESS_KEY=pcyVraVy3QKXuuDkznzB
+set BROWSERSTACK_USERNAME=pritikakade_iSthlH
+set BROWSERSTACK_ACCESS_KEY=is26qVAD3u93RzNpKjrv
 
 :: Define the folder containing Dockerfiles
 set dockerfiles_folder=android_dockerfiles

@@ -93,8 +93,8 @@ def generate_browserstack_yml(env_key, env_config, output_file):
     platforms_str = "\n".join(platforms)
 
     browserstack_yml_content = f"""
-userName: pritikakade_PBIw6A
-accessKey: pcyVraVy3QKXuuDkznzB
+userName: pritikakade_iSthlH
+accessKey: is26qVAD3u93RzNpKjrv
 app: {app_url}
 
 platforms:

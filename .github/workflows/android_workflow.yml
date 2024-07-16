@@ -1,9 +1,9 @@
-name: Run Docker Images
+name: Build and Run Docker Images
 
 on:
   push:
     branches:
-      - android           # Trigger workflow on push to android branch
+      - android
 
 jobs:
   build-and-run:
@@ -16,6 +16,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
+      - name: Log in to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+
       - name: Pull Docker images
         run: |
           docker pull pritikakade/android_images:android_qa
@@ -24,7 +28,9 @@ jobs:
 
       - name: Run Docker images
         run: |
-          docker run -d pritikakade/android_images:android_qa
-          docker run -d pritikakade/android_images:android_staging
-          docker run -d pritikakade/android_images:android_prod
+          docker run -d --name android_qa_container -p 8081:80 pritikakade/android_images:android_qa
+          docker run -d --name android_staging_container -p 8082:80 pritikakade/android_images:android_staging
+          docker run -d --name android_prod_container -p 8083:80 pritikakade/android_images:android_prod
 
+      - name: Display running containers
+        run: docker ps -a

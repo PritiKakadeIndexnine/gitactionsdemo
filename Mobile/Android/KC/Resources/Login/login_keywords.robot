@@ -18,8 +18,8 @@ ${APPIUM SERVER TIMEOUT}    60000
 ${Expected_resend_otp_limit_count}     4
 ${actual_resend_otp_limit_count}   0
 
-${BROWSERSTACK_USERNAME}    mrunalineepisal_N6jlAe
-${BROWSERSTACK_ACCESS_KEY}  aPcgH8JsgZmqxJzmsmcv
+${BROWSERSTACK_USERNAME}    pritikakade_PBIw6A
+${BROWSERSTACK_ACCESS_KEY}  pcyVraVy3QKXuuDkznzB
 ${REMOTE_URL}               https://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub.browserstack.com/wd/hub
 ${PLATFORM_NAME}            Android
 ${APP_PACKAGE}              android-browserstack
@@ -31,7 +31,7 @@ Open KC application
     ${env_data}  Get Environment Data    ${android_environment}
     ${env_data}  Create Dictionary  &{env_data}
     #Open Application    ${env_data.host}    platformName=${env_data.platformName}   deviceName=${env_data.deviceName}   app=${env_data.application_sdk}      autoGrantPermissions=true    automationName=${env_data.automationName}    noReset=true
-    Open Application    ${REMOTE_URL}    app=bs://ad6984759b2a9cf39dff326c2882f07ad651aea2   name=single_test    build=${APP_PACKAGE}    platformName=${PLATFORM_NAME}
+    Open Application    ${REMOTE_URL}       name=single_test    build=${APP_PACKAGE}    platformName=${PLATFORM_NAME}
 
 Verify Login Screen
     AppiumLibrary.Wait Until Element Is Visible   ${login_view}   timeout=120

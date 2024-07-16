@@ -288,6 +288,9 @@ def switch_and_merge_branch(branch):
     # Merge changes from git-actions-demo into the current branch
     subprocess.run(["git", "merge", "git-actions-demo", "--no-edit"], check=True)
 
+    # Push changes to the specified branch on remote repository
+    subprocess.run(["git", "push", "origin", branch], check=True)
+
 
 if __name__ == "__main__":
     with open("combined_environment.json", 'r') as f:

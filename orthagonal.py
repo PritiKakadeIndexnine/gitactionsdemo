@@ -93,8 +93,8 @@ def generate_browserstack_yml(env_key, env_config, output_file):
     platforms_str = "\n".join(platforms)
 
     browserstack_yml_content = f"""
-userName: mrunalineepisal_N6jlAe
-accessKey: aPcgH8JsgZmqxJzmsmcv
+userName: pritikakade_PBIw6A
+accessKey: pcyVraVy3QKXuuDkznzB
 app: {app_url}
 
 platforms:
@@ -343,11 +343,13 @@ if __name__ == "__main__":
 
     commit_and_push_changes("git-actions-demo", remote_url)
 
-    # Switch to web branch and merge changes
-    switch_and_merge_branch("web")
+    # # Switch to web branch and merge changes
+    # switch_and_merge_branch("web")
 
     # Switch to android branch and merge changes
     switch_and_merge_branch("android")
+    
+
 
 
 

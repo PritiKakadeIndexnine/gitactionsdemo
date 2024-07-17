@@ -87,6 +87,8 @@ def generate_browserstack_yml(env_key, env_config, output_file):
     - platformName: android
       deviceName: {device['deviceName']}
       platformVersion: {device['platformVersion']}
+      bstack:options:
+         idleTimeout: 300
             """
         platforms.append(platform)
 

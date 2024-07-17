@@ -23,14 +23,14 @@ jobs:
       - name: Pull Docker images
         run: |
           docker pull pritikakade/android_images:android_qa
-          docker pull pritikakade/android_images:android_staging
-          docker pull pritikakade/android_images:android_prod
+#          docker pull pritikakade/android_images:android_staging
+#          docker pull pritikakade/android_images:android_prod
 
       - name: Run Docker images
         run: |
           docker run -d --name android_qa_container -p 8081:80 pritikakade/android_images:android_qa
-          docker run -d --name android_staging_container -p 8082:80 pritikakade/android_images:android_staging
-          docker run -d --name android_prod_container -p 8083:80 pritikakade/android_images:android_prod
+#          docker run -d --name android_staging_container -p 8082:80 pritikakade/android_images:android_staging
+#          docker run -d --name android_prod_container -p 8083:80 pritikakade/android_images:android_prod
 
       - name: Display running containers
         run: docker ps -a

@@ -108,6 +108,8 @@ parallelsPerPlatform: 1
 CUSTOM_TAG_1: "Test"
 framework: robot
 idleTimeout: 300
+interactiveDebugging : true
+browserstack.debug : true
 testObservability: true
 """
     with open(output_file, 'w') as f:

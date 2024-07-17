@@ -7,22 +7,16 @@ platforms:
     - platformName: android
       deviceName: Samsung Galaxy S22 Ultra
       platformVersion: 12.0
-      bstack:options:
-         idleTimeout: 300
             
 
     - platformName: android
       deviceName: Google Pixel 7 Pro
       platformVersion: 13.0
-      bstack:options:
-         idleTimeout: 300
             
 
     - platformName: android
       deviceName: Samsung Galaxy S21 Ultra
       platformVersion: 11.0
-      bstack:options:
-         idleTimeout: 300
             
 
 projectName: wm-indexnine-qa-automation
@@ -32,4 +26,5 @@ buildTag: reg
 parallelsPerPlatform: 1
 CUSTOM_TAG_1: "Test"
 framework: robot
+idleTimeout: 300
 testObservability: true

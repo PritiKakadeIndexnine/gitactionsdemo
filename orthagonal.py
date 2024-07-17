@@ -87,8 +87,6 @@ def generate_browserstack_yml(env_key, env_config, output_file):
     - platformName: android
       deviceName: {device['deviceName']}
       platformVersion: {device['platformVersion']}
-      bstack:options:
-         idleTimeout: 300
             """
         platforms.append(platform)
 
@@ -109,6 +107,7 @@ buildTag: reg
 parallelsPerPlatform: 1
 CUSTOM_TAG_1: "Test"
 framework: robot
+idleTimeout: 300
 testObservability: true
 """
     with open(output_file, 'w') as f:

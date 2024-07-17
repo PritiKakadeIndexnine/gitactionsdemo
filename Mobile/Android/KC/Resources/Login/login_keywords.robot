@@ -28,8 +28,8 @@ ${APP_ACTIVITY}             your.app.activity
 
 *** Keywords ***
 Open KC application
-    ${env_data}  Get Environment Data    ${android_environment}
-    ${env_data}  Create Dictionary  &{env_data}
+#    ${env_data}  Get Environment Data    ${android_environment}
+#    ${env_data}  Create Dictionary  &{env_data}
 #    Open Application    ${env_data.host}    platformName=${env_data.platformName}   deviceName=${env_data.deviceName}   app=${env_data.application_sdk}      autoGrantPermissions=true    automationName=${env_data.automationName}    noReset=true
     Open Application    ${REMOTE_URL}    build=${APP_PACKAGE}    platformName=${PLATFORM_NAME}
 

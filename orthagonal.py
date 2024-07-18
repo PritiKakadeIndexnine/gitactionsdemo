@@ -93,8 +93,8 @@ def generate_browserstack_yml(env_key, env_config, output_file):
     platforms_str = "\n".join(platforms)
 
     browserstack_yml_content = f"""
-userName: pritikakade_iSthlH
-accessKey: is26qVAD3u93RzNpKjrv
+userName: pritikakade_mpWqaD
+accessKey: qa4V3paWbWhssYuufqpt
 app: {app_url}
 
 platforms:
@@ -352,11 +352,6 @@ if __name__ == "__main__":
     # Switch to android branch and merge changes
     switch_and_merge_branch("android")
     
-
-
-
-
-
 
 
 

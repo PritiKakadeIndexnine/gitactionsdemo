@@ -18,8 +18,8 @@ ${APPIUM SERVER TIMEOUT}    60000
 ${Expected_resend_otp_limit_count}     4
 ${actual_resend_otp_limit_count}   0
 
-${BROWSERSTACK_USERNAME}    pritikakade_iSthlH
-${BROWSERSTACK_ACCESS_KEY}  is26qVAD3u93RzNpKjrv
+${BROWSERSTACK_USERNAME}    pritikakade_mpWqaD
+${BROWSERSTACK_ACCESS_KEY}  qa4V3paWbWhssYuufqpt
 ${REMOTE_URL}               https://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub.browserstack.com/wd/hub
 ${PLATFORM_NAME}            Android
 ${APP_PACKAGE}              android-browserstack

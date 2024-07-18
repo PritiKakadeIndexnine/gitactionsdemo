@@ -2,8 +2,8 @@
 setlocal enabledelayedexpansion
 
 :: Define BrowserStack credentials
-set BROWSERSTACK_USERNAME=pritikakade_iSthlH
-set BROWSERSTACK_ACCESS_KEY=is26qVAD3u93RzNpKjrv
+set BROWSERSTACK_USERNAME=pritikakade_mpWqaD
+set BROWSERSTACK_ACCESS_KEY=qa4V3paWbWhssYuufqpt
 
 :: Define the folder containing Dockerfiles
 set dockerfiles_folder=android_dockerfiles
@@ -12,8 +12,8 @@ set dockerfiles_folder=android_dockerfiles
 set environments=qa staging prod
 
 :: Define your Docker Hub username and repository
-set dockerhub_username=pritikakade
-set repository_name=android_images
+:: set dockerhub_username=pritikakade
+:: set repository_name=android_images
 
 :: Initialize an empty variable to track image names
 set image_list=
@@ -32,26 +32,26 @@ for %%e in (%environments%) do (
     )
 
     :: Tag the Docker image for Docker Hub
-    docker tag %%e_image %dockerhub_username%/%repository_name%:android_%%e
+    ::docker tag %%e_image %dockerhub_username%/%repository_name%:android_%%e
 
     :: Push the Docker image to Docker Hub
-    docker push %dockerhub_username%/%repository_name%:android_%%e
+    :: docker push %dockerhub_username%/%repository_name%:android_%%e
 
     :: Check if the image was pushed successfully
-    if !ERRORLEVEL! neq 0 (
-        echo Failed to push Docker image for environment: %%e
-        exit /b 1
-    )
+    ::if !ERRORLEVEL! neq 0 (
+      ::  echo Failed to push Docker image for environment: %%e
+       :: exit /b 1
+   :: )
 
     :: Append the image name to the list
     if "!image_list!" == "" (
-        set image_list=%dockerhub_username%/%repository_name%:android_%%e
+        set image_list=android_%%e
     ) else (
-        set image_list=!image_list!, %dockerhub_username%/%repository_name%:android_%%e
+        set image_list=!image_list!,android_%%e
     )
 )
 
-echo All Docker images built and pushed successfully to Docker Hub.
+echo All Docker images built successfully.
 
 :: Define the filename for the image list (optional)
 set filename=android_docker_images_list.txt
@@ -61,3 +61,4 @@ echo list=[!image_list!] > %filename%
 
 echo Image list appended to %filename%
 endlocal
+

@@ -11,9 +11,6 @@ set dockerfiles_folder=android_dockerfiles
 :: Define environments
 set environments=qa staging prod
 
-:: Define your Docker Hub username and repository
-:: set dockerhub_username=pritikakade
-:: set repository_name=android_images
 
 :: Initialize an empty variable to track image names
 set image_list=
@@ -31,23 +28,12 @@ for %%e in (%environments%) do (
         exit /b 1
     )
 
-    :: Tag the Docker image for Docker Hub
-    ::docker tag %%e_image %dockerhub_username%/%repository_name%:android_%%e
-
-    :: Push the Docker image to Docker Hub
-    :: docker push %dockerhub_username%/%repository_name%:android_%%e
-
-    :: Check if the image was pushed successfully
-    ::if !ERRORLEVEL! neq 0 (
-      ::  echo Failed to push Docker image for environment: %%e
-       :: exit /b 1
-   :: )
 
     :: Append the image name to the list
     if "!image_list!" == "" (
-        set image_list=android_%%e
+        set image_list=%dockerhub_username%/%repository_name%:android_%%e
     ) else (
-        set image_list=!image_list!,android_%%e
+        set image_list=!image_list!, %dockerhub_username%/%repository_name%:android_%%e
     )
 )
 
@@ -61,4 +47,3 @@ echo list=[!image_list!] > %filename%
 
 echo Image list appended to %filename%
 endlocal
-

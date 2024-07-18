@@ -33,7 +33,7 @@ jobs:
 
       - name: Build Docker images
         run: |
-          environments="qa"
+          environments="qa prod staging"
           image_list=""
 
           for env in $environments; do

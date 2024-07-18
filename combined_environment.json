@@ -16,9 +16,9 @@
   },
   "android": {
     "env": {
-      "staging": "bs://900654cfadb23fe05919e842d77f689c719786cd",
-      "qa": "bs://900654cfadb23fe05919e842d77f689c719786cd",
-      "prod": "bs://900654cfadb23fe05919e842d77f689c719786cd"
+      "staging": "bs://ddea3488fa7b5acb9aa6c273ea05f5ad16cefd4a",
+      "qa": "bs://ddea3488fa7b5acb9aa6c273ea05f5ad16cefd4a",
+      "prod": "bs://ddea3488fa7b5acb9aa6c273ea05f5ad16cefd4a"
     },
     "device": [
       {

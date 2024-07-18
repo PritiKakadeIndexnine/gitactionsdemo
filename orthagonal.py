@@ -338,9 +338,9 @@ if __name__ == "__main__":
             for file in android_files:
                 print(file)
 
-    subprocess.run(["build_images_android.bat"], shell=True)
+    # subprocess.run(["build_images_android.bat"], shell=True)
 
-    subprocess.run(["build_images.bat"], shell=True)
+    # subprocess.run(["build_images.bat"], shell=True)
 
     remote_url = input("Please enter the remote URL for git push: ")
 
@@ -352,6 +352,11 @@ if __name__ == "__main__":
     # Switch to android branch and merge changes
     switch_and_merge_branch("android")
     
+
+
+
+
+
 
 
 

@@ -138,8 +138,27 @@ jobs:
 
           echo "$TASK_DEF_JSON" > task-def.json
           aws ecs register-task-definition --cli-input-json file://task-def.json
-env:
-    AWS_DEFAULT_REGION: us-east-1
-    AWS_REGION: us-east-1
-    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          
+        env:
+             AWS_DEFAULT_REGION: us-east-1
+             AWS_REGION: us-east-1
+             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Create ECS Service
+        run: |
+          CLUSTER_NAME=demo-cluster
+          SERVICE_NAME=demo-service
+          TASK_DEFINITION_NAME=demo-task
+          SUBNETS=subnet-12345abc,subnet-67890def  # Update with your subnets
+          SECURITY_GROUPS=sg-0123456789abcdef  # Update with your security groups
+
+          aws ecs create-service \
+            --cluster $CLUSTER_NAME \
+            --service-name $SERVICE_NAME \
+            --task-definition $TASK_DEFINITION_NAME \
+            --desired-count 1 \
+            --launch-type FARGATE \
+            --network-configuration "awsvpcConfiguration={subnets=[$SUBNETS],securityGroups=[$SECURITY_GROUPS],assignPublicIp=ENABLED}"
+        
+            

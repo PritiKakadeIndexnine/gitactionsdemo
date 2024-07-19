@@ -129,8 +129,8 @@ jobs:
             \"requiresCompatibilities\": [\"FARGATE\"],
             \"cpu\": \"1024\",
             \"memory\": \"2048\",
-            \"executionRoleArn\": \"arn:aws:iam::YOUR_ACCOUNT_ID:role/YOUR_EXECUTION_ROLE\",
-            \"taskRoleArn\": \"arn:aws:iam::YOUR_ACCOUNT_ID:role/YOUR_TASK_ROLE\"
+            \"executionRoleArn\": \"arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskExecutionRole\",
+            \"taskRoleArn\": \"arn:aws:iam::YOUR_ACCOUNT_ID:role/Task_Role_Policy\"
           }"
 
           echo "$TASK_DEF_JSON" > task-def.json

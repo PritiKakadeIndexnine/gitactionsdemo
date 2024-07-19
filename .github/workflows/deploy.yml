@@ -1,0 +1,71 @@
+name: Build and Push Multiple Docker Images to AWS ECR
+
+on:
+  push:
+    branches:
+      - android
+
+  workflow_dispatch:
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+  
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ensure all tags are fetched
+
+      - name: Install dos2unix
+        run: sudo apt-get install -y dos2unix
+
+      - name: Convert line endings
+        run: dos2unix ./build/git_update.sh
+
+      - name: List build directory contents
+        run: ls -alh build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Automatic Tagging of Releases
+        id: increment-git-tag
+        run: |
+          chmod +x ./build/git_update.sh
+          ./build/git_update.sh -v major
+
+      - name: Build, Tag, and Push Images to Amazon ECR
+        id: build-and-push
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: testvj
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Find all Dockerfiles in the web_dockerfiles folder
+          DOCKERFILES=$(find ./web_dockerfiles -name 'Dockerfile*')
+          
+          # Loop through the Dockerfiles and build/push images
+          for DOCKERFILE in $DOCKERFILES; do
+            # Extract the name part for tagging
+            BASENAME=$(basename $DOCKERFILE)
+            TAG=${BASENAME//Dockerfile_/}
+            TAG=${TAG:-default}  # Fallback to 'default' if no specific tag
+            
+            IMAGE_URI="$ECR_REGISTRY/$ECR_REPOSITORY:$TAG-$IMAGE_TAG"
+            
+            echo "Building and pushing Docker image for $DOCKERFILE to $IMAGE_URI"
+            
+            docker build -f $DOCKERFILE -t $IMAGE_URI .
+            docker push $IMAGE_URI
+            
+            echo "IMAGE $IMAGE_URI is pushed to $ECR_REGISTRY/$ECR_REPOSITORY"
+          done

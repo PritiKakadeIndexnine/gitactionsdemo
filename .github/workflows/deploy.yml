@@ -84,3 +84,54 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1
+
+      - name: Register ECS Task Definition
+        id: register-task-def
+        run: |
+          CLUSTER_NAME=demo-cluster
+          TASK_DEFINITION_NAME=demo-task
+
+          DOCKERFILES=$(find ./web_dockerfiles -name 'Dockerfile*')
+          CONTAINERS_JSON=""
+
+          for DOCKERFILE in $DOCKERFILES; do
+            BASENAME=$(basename $DOCKERFILE)
+            TAG=${BASENAME//Dockerfile_/}
+            TAG=${TAG:-default}  # Fallback to 'default' if no specific tag
+            IMAGE_URI="$ECR_REGISTRY/$ECR_REPOSITORY:$TAG-$IMAGE_TAG"
+
+            CONTAINER_NAME="${TAG}-container"
+
+            CONTAINERS_JSON+="{
+              \"name\": \"$CONTAINER_NAME\",
+              \"image\": \"$IMAGE_URI\",
+              \"essential\": true,
+              \"memory\": 512,
+              \"cpu\": 256,
+              \"portMappings\": [
+                {
+                  \"containerPort\": 80,
+                  \"hostPort\": 80
+                }
+              ]
+            },"
+          done
+
+          # Remove the trailing comma
+          CONTAINERS_JSON=${CONTAINERS_JSON%,}
+
+          TASK_DEF_JSON="{
+            \"family\": \"$TASK_DEFINITION_NAME\",
+            \"networkMode\": \"awsvpc\",
+            \"containerDefinitions\": [
+              $CONTAINERS_JSON
+            ],
+            \"requiresCompatibilities\": [\"FARGATE\"],
+            \"cpu\": \"1024\",
+            \"memory\": \"2048\",
+            \"executionRoleArn\": \"arn:aws:iam::YOUR_ACCOUNT_ID:role/YOUR_EXECUTION_ROLE\",
+            \"taskRoleArn\": \"arn:aws:iam::YOUR_ACCOUNT_ID:role/YOUR_TASK_ROLE\"
+          }"
+
+          echo "$TASK_DEF_JSON" > task-def.json
+          aws ecs register-task-definition --cli-input-json file://task-def.json

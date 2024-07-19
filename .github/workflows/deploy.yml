@@ -150,8 +150,8 @@ jobs:
           CLUSTER_NAME=demo-cluster
           SERVICE_NAME=demo-service
           TASK_DEFINITION_NAME=demo-task
-          SUBNETS=subnet-12345abc,subnet-67890def  # Update with your subnets
-          SECURITY_GROUPS=sg-0123456789abcdef  # Update with your security groups
+          SUBNETS=subnet-0bb3bf20e0804e17a  # Update with your subnets
+          SECURITY_GROUPS=sg-02c71277c7fbecb27  # Update with your security groups
 
           aws ecs create-service \
             --cluster $CLUSTER_NAME \

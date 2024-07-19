@@ -69,3 +69,18 @@ jobs:
             
             echo "IMAGE $IMAGE_URI is pushed to $ECR_REGISTRY/$ECR_REPOSITORY"
           done
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+          aws --version
+
+      
+      - name: Create ECS Cluster
+        run: |
+          aws ecs create-cluster --cluster-name demo-cluster --region us-east-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1

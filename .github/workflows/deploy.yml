@@ -3,7 +3,7 @@ name: Build and Push Multiple Docker Images to AWS ECR
 on:
   push:
     branches:
-      - git-actions-demo
+      - main
 
   workflow_dispatch:
 
@@ -47,11 +47,12 @@ jobs:
         id: build-and-push
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: testvj
+          ECR_REPOSITORY: demo
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          # Find all Dockerfiles in the web_dockerfiles folder
-          DOCKERFILES=$(find ./web_dockerfiles -name 'Dockerfile*')
+          # Find all Dockerfiles in the repository
+          DOCKERFILES=$(find . -name 'Dockerfile*')
+          > image-uris.txt  # Clear or create a file to store image URIs
           
           # Loop through the Dockerfiles and build/push images
           for DOCKERFILE in $DOCKERFILES; do
@@ -68,6 +69,9 @@ jobs:
             docker push $IMAGE_URI
             
             echo "IMAGE $IMAGE_URI is pushed to $ECR_REGISTRY/$ECR_REPOSITORY"
+            
+            # Save the image URI to a file
+            echo "$TAG:$IMAGE_URI" >> image-uris.txt
           done
 
       - name: Install AWS CLI
@@ -76,10 +80,17 @@ jobs:
           sudo apt-get install -y awscli
           aws --version
 
-      
+      - name: Create Log Group
+        run: |
+          aws logs create-log-group --log-group-name /ecs/my-task || true
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1
+
       - name: Create ECS Cluster
         run: |
-          aws ecs create-cluster --cluster-name demo-cluster --region us-east-1
+          aws ecs create-cluster --cluster-name my-cluster --region us-east-1 || true
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -88,37 +99,52 @@ jobs:
       - name: Register ECS Task Definition
         id: register-task-def
         run: |
-          CLUSTER_NAME=demo-cluster
-          TASK_DEFINITION_NAME=demo-task
+          CLUSTER_NAME=my-cluster
+          TASK_DEFINITION_NAME=my-task
 
-          DOCKERFILES=$(find ./web_dockerfiles -name 'Dockerfile*')
+          DOCKERFILES=$(find . -name 'Dockerfile*')
           CONTAINERS_JSON=""
           PORT=8080  # Starting port for containerPort and hostPort
+          CONTAINER_CPU=256  # CPU units for each container
+          CONTAINER_MEMORY=512  # Memory for each container
+          TOTAL_CPU=0
+          TOTAL_MEMORY=0
 
-          for DOCKERFILE in $DOCKERFILES; do
-            BASENAME=$(basename $DOCKERFILE)
-            TAG=${BASENAME//Dockerfile_/}
-            TAG=${TAG:-default}  # Fallback to 'default' if no specific tag
-            IMAGE_URI="$ECR_REGISTRY/$ECR_REPOSITORY:$TAG-$IMAGE_TAG"
-
+          # Read image URIs from the file
+          while IFS=: read -r TAG IMAGE_URI; do
             CONTAINER_NAME="${TAG}-container"
 
-            CONTAINERS_JSON+="{
-              \"name\": \"$CONTAINER_NAME\",
-              \"image\": \"$IMAGE_URI\",
-              \"essential\": true,
-              \"memory\": 512,
-              \"cpu\": 256,
-              \"portMappings\": [
-                {
-                  \"containerPort\": $PORT,
-                  \"hostPort\": $PORT
-                }
-              ]
-            },"
+            TOTAL_CPU=$((TOTAL_CPU + CONTAINER_CPU))
+            TOTAL_MEMORY=$((TOTAL_MEMORY + CONTAINER_MEMORY))
 
-            PORT=$((PORT + 1))  # Increment port for next container
-          done
+            if [ $TOTAL_CPU -le 1024 ] && [ $TOTAL_MEMORY -le 2048 ]; then
+              CONTAINERS_JSON+="{
+                \"name\": \"$CONTAINER_NAME\",
+                \"image\": \"$IMAGE_URI\",
+                \"essential\": true,
+                \"memory\": $CONTAINER_MEMORY,
+                \"cpu\": $CONTAINER_CPU,
+                \"portMappings\": [
+                  {
+                    \"containerPort\": $PORT,
+                    \"hostPort\": $PORT
+                  }
+                ],
+                \"logConfiguration\": {
+                  \"logDriver\": \"awslogs\",
+                  \"options\": {
+                    \"awslogs-group\": \"/ecs/$TASK_DEFINITION_NAME\",
+                    \"awslogs-region\": \"us-east-1\",
+                    \"awslogs-stream-prefix\": \"$CONTAINER_NAME\"
+                  }
+                }
+              },"
+
+              PORT=$((PORT + 1))  # Increment port for next container
+            else
+              echo "Skipping container $CONTAINER_NAME due to resource limits."
+            fi
+          done < image-uris.txt
 
           # Remove the trailing comma
           CONTAINERS_JSON=${CONTAINERS_JSON%,}
@@ -132,39 +158,47 @@ jobs:
             \"requiresCompatibilities\": [\"FARGATE\"],
             \"cpu\": \"1024\",
             \"memory\": \"2048\",
-            \"executionRoleArn\": \"arn:aws:iam::533267409793:role/ecsTaskExecutionRole\",
-            \"taskRoleArn\": \"arn:aws:iam::533267409793:role/Task_Role_Policy\"
+            \"executionRoleArn\": \"arn:aws:iam::533267409793:role/ecsTaskExecutionRole\"
           }"
 
-          echo "$TASK_DEF_JSON" > task-def.json
-          aws ecs register-task-definition --cli-input-json file://task-def.json
-          
+          echo "$TASK_DEF_JSON" > task-definition.json
+          aws ecs register-task-definition --cli-input-json file://task-definition.json
         env:
-             AWS_DEFAULT_REGION: us-east-1
-             AWS_REGION: us-east-1
-             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-      - name: Create ECS Service
-        run: |
-          CLUSTER_NAME=demo-cluster
-          SERVICE_NAME=demo-service
-          TASK_DEFINITION_NAME=demo-task
-          SUBNETS=subnet-0bb3bf20e0804e17a  # Update with your subnets
-          SECURITY_GROUPS=sg-02c71277c7fbecb27  # Update with your security groups
-
-          aws ecs create-service \
-            --cluster $CLUSTER_NAME \
-            --service-name $SERVICE_NAME \
-            --task-definition $TASK_DEFINITION_NAME \
-            --desired-count 1 \
-            --launch-type FARGATE \
-            --network-configuration "awsvpcConfiguration={subnets=[$SUBNETS],securityGroups=[$SECURITY_GROUPS],assignPublicIp=ENABLED}"
-
-        env:
-          AWS_DEFAULT_REGION: us-east-1
-          AWS_REGION: us-east-1
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-              
-            
+          AWS_DEFAULT_REGION: us-east-1
+
+      - name: Create or Update ECS Service
+        run: |
+          CLUSTER_NAME=my-cluster
+          SERVICE_NAME=my-service
+          TASK_DEFINITION_NAME=my-task
+
+          # Check if the service already exists
+          SERVICE_EXISTS=$(aws ecs describe-services --cluster $CLUSTER_NAME --services $SERVICE_NAME --query 'services[0].status' --output text --region us-east-1 2>/dev/null || echo "MISSING")
+
+          if [ "$SERVICE_EXISTS" == "MISSING" ]; then
+            # Create the service if it doesn't exist
+            aws ecs create-service \
+              --cluster $CLUSTER_NAME \
+              --service-name $SERVICE_NAME \
+              --task-definition $TASK_DEFINITION_NAME \
+              --desired-count 1 \
+              --launch-type FARGATE \
+              --network-configuration "awsvpcConfiguration={subnets=[subnet-0bb1c79de3EXAMPLE, subnet-0bb1c79de4EXAMPLE],securityGroups=[sg-0123456789abcdef0],assignPublicIp=ENABLED}" \
+              --region us-east-1
+          else
+            # Update the service if it exists
+            aws ecs update-service \
+              --cluster $CLUSTER_NAME \
+              --service $SERVICE_NAME \
+              --task-definition $TASK_DEFINITION_NAME \
+              --desired-count 1 \
+              --region us-east-1
+          fi
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1
+
+

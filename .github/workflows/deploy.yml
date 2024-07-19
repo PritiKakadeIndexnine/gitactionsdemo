@@ -93,6 +93,7 @@ jobs:
 
           DOCKERFILES=$(find ./web_dockerfiles -name 'Dockerfile*')
           CONTAINERS_JSON=""
+          PORT=8080  # Starting port for containerPort and hostPort
 
           for DOCKERFILE in $DOCKERFILES; do
             BASENAME=$(basename $DOCKERFILE)
@@ -110,11 +111,13 @@ jobs:
               \"cpu\": 256,
               \"portMappings\": [
                 {
-                  \"containerPort\": 80,
-                  \"hostPort\": 0
+                  \"containerPort\": $PORT,
+                  \"hostPort\": $PORT
                 }
               ]
             },"
+
+            PORT=$((PORT + 1))  # Increment port for next container
           done
 
           # Remove the trailing comma
@@ -135,3 +138,8 @@ jobs:
 
           echo "$TASK_DEF_JSON" > task-def.json
           aws ecs register-task-definition --cli-input-json file://task-def.json
+env:
+    AWS_DEFAULT_REGION: us-east-1
+    AWS_REGION: us-east-1
+    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -10,5 +10,9 @@
     {
         "Browser": "Edge",
         "Env": "Prod"
+    },
+    {
+        "Browser": "Chrome",
+        "Env": "QA"
     }
 ]

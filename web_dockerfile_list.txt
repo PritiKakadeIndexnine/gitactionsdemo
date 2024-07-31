@@ -1,10 +1,2 @@
-d://oats\Execution-2024-07-31_19-25-00\web_dockerfiles\Dockerfile_web_1
-d://oats\Execution-2024-07-31_19-25-00\updated_env_web_1.json
-d://oats\Execution-2024-07-31_19-25-00\web_dockerfiles\Dockerfile_web_2
-d://oats\Execution-2024-07-31_19-25-00\updated_env_web_2.json
-d://oats\Execution-2024-07-31_19-25-00\web_dockerfiles\Dockerfile_web_3
-d://oats\Execution-2024-07-31_19-25-00\updated_env_web_3.json
-d://oats\Execution-2024-07-31_19-25-00\web_dockerfiles\Dockerfile_web_4
-d://oats\Execution-2024-07-31_19-25-00\updated_env_web_4.json
-d://oats\Execution-2024-07-31_19-25-00\web_dockerfiles\Dockerfile_web_5
-d://oats\Execution-2024-07-31_19-25-00\updated_env_web_5.json
+d://oats\Execution-2024-07-31_19-29-22\web_dockerfiles\Dockerfile_web_1
+d://oats\Execution-2024-07-31_19-29-22\updated_env_web_1.json

@@ -3,7 +3,7 @@ name: Run Tests on BrowserStack
 on:
   push:
     branches:
-      - main
+      - web
 
 jobs:
   test:

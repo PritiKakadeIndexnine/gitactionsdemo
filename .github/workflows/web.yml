@@ -3,11 +3,8 @@ name: BrowserStack Multi-Browser Testing
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+      - web
+  
 jobs:
   test-chrome:
     runs-on: ubuntu-latest

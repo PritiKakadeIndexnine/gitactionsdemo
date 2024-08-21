@@ -83,17 +83,6 @@ web_dockerfile_list = 'web_dockerfile_list.txt'
 android_dockerfile_list = 'android_dockerfile_list.txt'
 
 
-def initialize_dockerfile_list(file_path):
-    if not os.path.exists(file_path):
-        with open(file_path, 'w') as f:
-            f.write('Dockerfiles Generated:\n')
-
-
-def update_dockerfile_list(file_path, dockerfile_name):
-    with open(file_path, 'a') as f:
-        f.write(dockerfile_name + '\n')
-
-
 def generate_browserstack_yml(env_key, env_config, output_file):
     app_url = env_config['env'][env_key]
 
@@ -200,8 +189,6 @@ CMD ["browserstack-sdk", "pabot", "Mobile/Android/KC/TestCases/Login/already_reg
         f.write(dockerfile_content.strip())
     print(f"Dockerfile written to '{file_output_path}'")
 
-    update_dockerfile_list(android_dockerfile_list, file_output_path)
-
 
 def generate_dockerfile_web(env_details, json_file, output_file, platform,dockerfiles_folder="web_dockerfiles"):
 
@@ -265,8 +252,6 @@ CMD ["robot","/robot/Web/RR/TestCases/Login/login_test.robot"]
     with open(file_output_path, 'w') as f:
         f.write(formatted_content.strip())
     print(f"Dockerfile written to '{file_output_path}'")
-
-    update_dockerfile_list(web_dockerfile_list, file_output_path)
 
 
 def update_web_environment_combinations(combinations, env_config):

@@ -3,7 +3,7 @@ name: Build and Run Dockerfiles
 on:
   push:
     branches:
-      - android
+      - main
 
 jobs:
   build-and-run:

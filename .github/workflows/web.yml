@@ -1,9 +1,7 @@
 name: Run Tests on BrowserStack
 
-on:
-  push:
-    branches:
-      - web
+on: [push, pull_request]
+
 
 jobs:
   test:

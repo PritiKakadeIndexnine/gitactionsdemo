@@ -1,18 +1,11 @@
-name: BrowserStack Multi-Browser Testing
+name: Run Tests on BrowserStack
 
-on:
-  push:
-    branches:
-      - web
-  
+on: [push, pull_request]
+
 jobs:
-  test-chrome:
+  test:
     runs-on: ubuntu-latest
-    env:
-      BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
-      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-      BROWSER: "Chrome"
-      BROWSER_VERSION: "latest"
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -22,61 +15,16 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Install dependencies
+    - name: Install Robot Framework and Dependencies
       run: |
-        python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install robotframework-seleniumlibrary
 
-    - name: Run tests on BrowserStack (Chrome)
+    - name: Run Tests on BrowserStack (Chrome)
       run: |
-        Web/RR/TestCases/Login/login_test.robot
+        robot --variable Browser:Chrome Web/RR/TestCases/Login/login_test.robot
+      env:
+        BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+        BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
 
-  test-firefox:
-    runs-on: ubuntu-latest
-    env:
-      BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
-      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-      BROWSER: "Firefox"
-      BROWSER_VERSION: "latest"
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Run tests on BrowserStack (Firefox)
-      run: |
-        Web/RR/TestCases/Login/login_test.robot
-
-  test-edge:
-    runs-on: ubuntu-latest
-    env:
-      BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
-      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-      BROWSER: "Edge"
-      BROWSER_VERSION: "latest"
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Run tests on BrowserStack (Edge)
-      run: |
-       Web/RR/TestCases/Login/login_test.robot
+   

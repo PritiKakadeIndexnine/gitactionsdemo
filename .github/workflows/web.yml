@@ -32,7 +32,7 @@ jobs:
 
     - name: Run tests on BrowserStack (Chrome)
       run: |
-        pytest tests/
+        Web/RR/TestCases/Login/login_test.robot
 
   test-firefox:
     runs-on: ubuntu-latest
@@ -57,7 +57,7 @@ jobs:
 
     - name: Run tests on BrowserStack (Firefox)
       run: |
-        pytest tests/
+        Web/RR/TestCases/Login/login_test.robot
 
   test-edge:
     runs-on: ubuntu-latest
@@ -82,4 +82,4 @@ jobs:
 
     - name: Run tests on BrowserStack (Edge)
       run: |
-        pytest tests/
+       Web/RR/TestCases/Login/login_test.robot

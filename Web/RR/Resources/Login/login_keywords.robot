@@ -17,13 +17,13 @@ ${BROWSERSTACK_USERNAME}    pritikakade_kqyoOr
 ${BROWSERSTACK_ACCESS_KEY}  MMfBZE6sxqz2KNieabxa
 
 *** Keywords ***
-open application and launch the URL
-    ${options} =  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys, selenium.webdriver
-    ${options_firefox} =    Evaluate    sys.modules['selenium.webdriver'].FirefoxOptions()    sys, selenium.webdriver
-    ${prefs}  Create Dictionary  download.default_directory=${default_download_path}
-    Call Method  ${options}  add_experimental_option  prefs  ${prefs}
-    Open Browser    https://stg-rr.sportz.io/    chrome
-    Open Browser    https://stg-rr.sportz.io/    firefox
+#open application and launch the URL
+#    ${options} =  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys, selenium.webdriver
+#    ${options_firefox} =    Evaluate    sys.modules['selenium.webdriver'].FirefoxOptions()    sys, selenium.webdriver
+#    ${prefs}  Create Dictionary  download.default_directory=${default_download_path}
+#    Call Method  ${options}  add_experimental_option  prefs  ${prefs}
+#    Open Browser    https://stg-rr.sportz.io/    chrome
+#    Open Browser    https://stg-rr.sportz.io/    firefox
 
 #Launch Application
 #    ${env_data}  Get Environment Data    ${web_environment}
@@ -53,7 +53,7 @@ Launch Application New
     ...  os_version=10
     ...  resolution=1920x1080
 
-    Open Browser   remote_url=http://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub  desired_capabilities=${desired_capabilities}
+    Open Browser   https://stg-rr.sportz.io/    browserName=${Browser}  os=Windows  remote_url=http://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub
 
 Click On Login Button
     Wait Until Page Contains Element    ${login_button}  timeout=30

@@ -20,7 +20,7 @@ Tc01 Verify if new clicks on yes button
     Verify OTP less sign in pop-up should get displayed to user
 
 Tc02 Verify the click on whats app icon
-    &{data}    fetch data by id    ${testdata}      1
+    &{data}    fetch data by id    ${testdata}      2
     Click On Login Button
     Enter Mobile Number     ${data.mobile_number}
     Click On Yes Button

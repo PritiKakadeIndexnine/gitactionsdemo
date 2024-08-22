@@ -53,7 +53,9 @@ Launch Application New
     ...  os_version=10
     ...  resolution=1920x1080
 
-    Open Browser   https://stg-rr.sportz.io/  browser=${Browser}  remote_url=http://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub
+    Open Browser   https://stg-rr.sportz.io/  browser=${Browser}  desired_capabilities=${desired_capabilities}  remote_url=http://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub
+    Maximize Browser Window
+#    Open Browser   https://stg-rr.sportz.io/  browser=${Browser}  remote_url=http://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub
 
 Click On Login Button
     Wait Until Page Contains Element    ${login_button}  timeout=30

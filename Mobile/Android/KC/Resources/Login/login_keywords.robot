@@ -24,8 +24,8 @@ ${REMOTE_URL}               https://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCE
 ${PLATFORM_NAME}            Android
 ${APP_PACKAGE}              android-browserstack
 ${APP_ACTIVITY}             your.app.activity
-#${deviceName}               Samsung Galaxy S21
-#${platformVersion}          11.0
+${deviceName}               Samsung Galaxy S21
+${platformVersion}          11.0
 
 *** Keywords ***
 #Open KC application
@@ -38,6 +38,8 @@ ${APP_ACTIVITY}             your.app.activity
 Open Application On Browserstack
     open application
         ...    ${REMOTE_URL}
+        ...    deviceName=${deviceName}
+        ...    platformVersion=${platformVersion}
         ...    platformName=${PLATFORM_NAME}
         ...    isRealMobile=true
         ...    app=bs://9a40beb599775cc6b800853959d0d7332ab975ee

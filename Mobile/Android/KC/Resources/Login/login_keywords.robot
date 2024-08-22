@@ -21,11 +21,15 @@ ${actual_resend_otp_limit_count}   0
 ${BROWSERSTACK_USERNAME}    pritikakade_kqyoOr
 ${BROWSERSTACK_ACCESS_KEY}  MMfBZE6sxqz2KNieabxa
 ${REMOTE_URL}               https://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub.browserstack.com/wd/hub
-${PLATFORM_NAME}            Android
+${LAMBDATEST_USERNAME}      suraj.warade
+${LAMBDATEST_ACCESSKEY}     c5gyNDEr11w2acPLuruyQ9Su3DUz5yYeqvWs6Pq8qAK6EaZtMF
+${LT_REMOTE_URL}            https://${LAMBDATEST_USERNAME}:${LAMBDATEST_ACCESSKEY}@mobile-hub.lambdatest.com/wd/hub
+${PLATFORM_NAME}            android
 ${APP_PACKAGE}              android-browserstack
 ${APP_ACTIVITY}             your.app.activity
-${deviceName}               Samsung Galaxy S21
-${platformVersion}          11.0
+${deviceName}               Galaxy S22 5G
+${platformVersion}          14.0
+
 
 *** Keywords ***
 #Open KC application
@@ -34,6 +38,16 @@ ${platformVersion}          11.0
 ##    Open Application    ${env_data.host}    platformName=${env_data.platformName}   deviceName=${env_data.deviceName}   app=${env_data.application_sdk}      autoGrantPermissions=true    automationName=${env_data.automationName}    noReset=true
 #    Open Application    ${REMOTE_URL}    build=${APP_PACKAGE}    platformName=${PLATFORM_NAME}
 
+Open Application On Lamda Test
+    open application
+        ...    ${LT_REMOTE_URL}
+        ...    deviceName=${deviceName}
+        ...    platformVersion=${platformVersion}
+        ...    platformName=${PLATFORM_NAME}
+        ...    isRealMobile=true
+        ...    app=lt://APP1016061291724326875162787
+        ...    name=LT_Demo
+        ...    automationName=UiAutomator2
 
 Open Application On Browserstack
     open application

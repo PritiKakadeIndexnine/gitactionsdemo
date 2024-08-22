@@ -6,7 +6,7 @@ Resource    ../../Resources/Login/login_keywords.robot
 Resource    ../../Resources/Notification/notification_keywords.robot
 Library    ../../../../../CommonBase/Utilities/user_keywords.py
 Library    ../../PageObjects/Login/login_locators.py
-Test Setup  Open Application On Browserstack
+Test Setup  Open Application On Lamda Test
 Test Teardown   Close Application
 
 *** Variables ***

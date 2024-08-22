@@ -1,0 +1,31 @@
+name: Run Android Tests on BrowserStack
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12'
+
+    - name: Install Robot Framework and Dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install robotframework-seleniumlibrary
+        pip install robotframework-appiumlibrary
+
+    - name: Run Tests on BrowserStack (Samsung)
+      run: |
+        robot --variable Device:Samsung Galaxy S21 --variable OS_Version:11.0 Mobile/Android/KC/TestCases/Login/already_registered_user_test.robot
+      env:
+        BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+        BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+
+    

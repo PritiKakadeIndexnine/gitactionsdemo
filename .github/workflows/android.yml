@@ -23,7 +23,7 @@ jobs:
 
     - name: Run Tests on BrowserStack (Samsung)
       run: |
-        robot --variable deviceName:Samsung Galaxy S21 --variable  platformVersion:11.0  Mobile/Android/KC/TestCases/Login/already_registered_user_test.robot
+        robot --variable deviceName:Samsung Galaxy S21  Mobile/Android/KC/TestCases/Login/already_registered_user_test.robot
       env:
         BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
         BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}

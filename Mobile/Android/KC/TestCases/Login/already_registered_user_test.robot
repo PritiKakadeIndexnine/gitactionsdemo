@@ -6,7 +6,7 @@ Resource    ../../Resources/Login/login_keywords.robot
 Resource    ../../Resources/Notification/notification_keywords.robot
 Library    ../../../../../CommonBase/Utilities/user_keywords.py
 Library    ../../PageObjects/Login/login_locators.py
-Test Setup  Open KC application
+Test Setup  Open Application On Browserstack
 Test Teardown   Close Application
 
 *** Variables ***

@@ -18,20 +18,34 @@ ${APPIUM SERVER TIMEOUT}    60000
 ${Expected_resend_otp_limit_count}     4
 ${actual_resend_otp_limit_count}   0
 
-${BROWSERSTACK_USERNAME}    pritikakade_mpWqaD
-${BROWSERSTACK_ACCESS_KEY}  qa4V3paWbWhssYuufqpt
+${BROWSERSTACK_USERNAME}    pritikakade_kqyoOr
+${BROWSERSTACK_ACCESS_KEY}  MMfBZE6sxqz2KNieabxa
 ${REMOTE_URL}               https://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub.browserstack.com/wd/hub
 ${PLATFORM_NAME}            Android
 ${APP_PACKAGE}              android-browserstack
 ${APP_ACTIVITY}             your.app.activity
-
+${deviceName}               Samsung Galaxy S21
+${platformVersion}          11.0
 
 *** Keywords ***
-Open KC application
-#    ${env_data}  Get Environment Data    ${android_environment}
-#    ${env_data}  Create Dictionary  &{env_data}
-#    Open Application    ${env_data.host}    platformName=${env_data.platformName}   deviceName=${env_data.deviceName}   app=${env_data.application_sdk}      autoGrantPermissions=true    automationName=${env_data.automationName}    noReset=true
-    Open Application    ${REMOTE_URL}    build=${APP_PACKAGE}    platformName=${PLATFORM_NAME}
+#Open KC application
+##    ${env_data}  Get Environment Data    ${android_environment}
+##    ${env_data}  Create Dictionary  &{env_data}
+##    Open Application    ${env_data.host}    platformName=${env_data.platformName}   deviceName=${env_data.deviceName}   app=${env_data.application_sdk}      autoGrantPermissions=true    automationName=${env_data.automationName}    noReset=true
+#    Open Application    ${REMOTE_URL}    build=${APP_PACKAGE}    platformName=${PLATFORM_NAME}
+
+
+Open Application On Browserstack
+    open application
+        ...    ${REMOTE_URL}
+        ...    deviceName=${deviceName}
+        ...    platformVersion=${platformVersion}
+        ...    platformName=${PLATFORM_NAME}
+        ...    isRealMobile=true
+        ...    app=bs://9a40beb599775cc6b800853959d0d7332ab975ee
+        ...    name=BS_Demo
+        ...    automationName=UiAutomator2
+
 
 Verify Login Screen
     AppiumLibrary.Wait Until Element Is Visible   ${login_view}   timeout=120

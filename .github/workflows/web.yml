@@ -13,7 +13,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: '3.12'
 
     - name: Install Robot Framework and Dependencies
       run: |
@@ -21,7 +21,7 @@ jobs:
         pip install robotframework-seleniumlibrary
     - name: Run Tests on BrowserStack (Chrome)
       run: |
-        robot --variable Browser:Firefox Web/RR/TestCases/Login/login_test.robot
+        robot --variable Browser:Chrome  Web/RR/TestCases/Login/login_test.robot
       env:
         BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
         BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}

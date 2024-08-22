@@ -355,7 +355,7 @@ if __name__ == "__main__":
     # switch_and_merge_branch("web")
 
     # Switch to android branch and merge changes
-    switch_and_merge_branch("android")
+    # switch_and_merge_branch("android")
     
 
 

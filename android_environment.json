@@ -1,0 +1,16 @@
+{
+  "devices": [
+    {
+      "deviceName": "Samsung Galaxy S22 Ultra",
+      "platformVersion": "12.0"
+    },
+    {
+      "deviceName": "Google Pixel 7 Pro",
+      "platformVersion": "13.0"
+    },
+    {
+      "deviceName": "Samsung Galaxy S21 Ultra",
+      "platformVersion": "11.0"
+    }
+  ]
+}

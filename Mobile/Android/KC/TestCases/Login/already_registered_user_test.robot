@@ -19,6 +19,7 @@ ${already_registered_user_td}       ${CURDIR}${/}..${/}..${/}TestData${/}already
 
 
 TC-01 Verify Valid Indian Mobile Number
+    [Tags]  demo
     &{login_data}   Fetch Data By Id    ${already_registered_user_td}   1
     Verify Login Screen
     Enter Mobile Number    ${login_data}

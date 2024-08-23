@@ -32,10 +32,10 @@ ${platformVersion}          14.0
 
 
 *** Keywords ***
-#Open KC application
-##    ${env_data}  Get Environment Data    ${android_environment}
-##    ${env_data}  Create Dictionary  &{env_data}
-##    Open Application    ${env_data.host}    platformName=${env_data.platformName}   deviceName=${env_data.deviceName}   app=${env_data.application_sdk}      autoGrantPermissions=true    automationName=${env_data.automationName}    noReset=true
+Open KC application
+    ${env_data}  Get Environment Data    ${android_environment}
+    ${env_data}  Create Dictionary  &{env_data}
+    Open Application    ${env_data.host}    platformName=${env_data.platformName}   deviceName=${env_data.deviceName}   app=${env_data.application_sdk}      autoGrantPermissions=true    automationName=${env_data.automationName}    noReset=false
 #    Open Application    ${REMOTE_URL}    build=${APP_PACKAGE}    platformName=${PLATFORM_NAME}
 
 Open Application On Lamda Test
@@ -46,6 +46,7 @@ Open Application On Lamda Test
         ...    platformName=${PLATFORM_NAME}
         ...    isRealMobile=true
         ...    app=lt://APP1016061291724326875162787
+        ...    build=Build_1
         ...    name=LT_Demo
         ...    automationName=UiAutomator2
 

@@ -347,9 +347,9 @@ if __name__ == "__main__":
 
     # subprocess.run(["build_images.bat"], shell=True)
 
-    remote_url = input("Please enter the remote URL for git push: ")
-
-    commit_and_push_changes("git-actions-demo", remote_url)
+    # remote_url = input("Please enter the remote URL for git push: ")
+    #
+    # commit_and_push_changes("git-actions-demo", remote_url)
 
     # # Switch to web branch and merge changes
     # switch_and_merge_branch("web")

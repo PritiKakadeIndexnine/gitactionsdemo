@@ -19,14 +19,14 @@ ${already_registered_user_td}       ${CURDIR}${/}..${/}..${/}TestData${/}already
 
 
 TC-01 Verify Valid Indian Mobile Number
-    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   6
+    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   1
     Verify Login Screen
     Enter Mobile Number    ${login_data}
     Click On Request Otp Button
     Check Otp Screen
 
 TC-02 Verify User Can Request An Otp For Login
-    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   2
+    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   3
     Verify Login Screen
     Enter Mobile Number    ${login_data}
     Click On Request Otp Button

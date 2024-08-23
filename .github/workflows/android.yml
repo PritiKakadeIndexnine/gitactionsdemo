@@ -31,7 +31,7 @@ jobs:
           
           # Construct and run the Robot Framework command
           echo "Running tests on $DEVICE_NAME with Android $PLATFORM_VERSION"
-          pabot --variable deviceName:"$DEVICE_NAME" --variable platformVersion:$PLATFORM_VERSION  Mobile/Android/KC/TestCases/Login/already_registered_user_test.robot
+          robot --variable deviceName:"$DEVICE_NAME" --variable platformVersion:$PLATFORM_VERSION  Mobile/Android/KC/TestCases/Login/already_registered_user_test.robot
         done
       env:
         BROWSERSTACK_USERNAME: ${{ secrets.LAMBDATEST_USERNAME }}

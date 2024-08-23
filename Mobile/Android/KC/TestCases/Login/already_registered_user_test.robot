@@ -27,6 +27,7 @@ TC-01 Verify Valid Indian Mobile Number
     Check Otp Screen
 
 TC-02 Verify User Can Request An Otp For Login
+    [Tags]  demo
     &{login_data}   Fetch Data By Id    ${already_registered_user_td}   3
     Verify Login Screen
     Enter Mobile Number    ${login_data}
@@ -74,6 +75,7 @@ TC-02 Verify User Can Request An Otp For Login
 #    Go Back
 
 TC_08 Verify Skip Button
+    [Tags]  demo
     Click And Verify Skip Button Before And After Otp Is Requested
 
 

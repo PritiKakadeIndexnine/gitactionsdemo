@@ -1,4 +1,4 @@
-name: Run Android Tests on BrowserStack
+name: Run Android Tests on LambdaTest
 
 on: [push, pull_request]
 
@@ -35,8 +35,8 @@ jobs:
             pabot --testlevelsplit -i demo --variable deviceName:"$DEVICE_NAME" --variable platformVersion:"$PLATFORM_VERSION" --variable app:"$APP_URL"  Mobile/Android/KC/TestCases/Login/already_registered_user_test.robot
           done
       env:
-          BROWSERSTACK_USERNAME: ${{ secrets.LAMBDATEST_USERNAME }}
-          BROWSERSTACK_ACCESS_KEY: ${{ secrets.LAMBDATEST_ACCESSKEY }}
+          LAMBDATEST_USERNAME: ${{ secrets.LAMBDATEST_USERNAME }}
+          LAMBDATEST_ACCESS_KEY: ${{ secrets.LAMBDATEST_ACCESSKEY }}
     
 
     - name: Upload test results

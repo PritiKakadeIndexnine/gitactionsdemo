@@ -29,7 +29,7 @@ ${APP_PACKAGE}              android-browserstack
 ${APP_ACTIVITY}             your.app.activity
 ${deviceName}               Galaxy S22 5G
 ${platformVersion}          14.0
-
+${app}                      lt://APP1016061291724326875162787
 
 *** Keywords ***
 Open KC application
@@ -45,8 +45,8 @@ Open Application On Lamda Test
         ...    platformVersion=${platformVersion}
         ...    platformName=${PLATFORM_NAME}
         ...    isRealMobile=true
-        ...    app=lt://APP1016061291724326875162787
-        ...    build=New_Android_Build
+        ...    app=${app}
+        ...    build=Android_Build_1
         ...    name=LT_Demo
         ...    automationName=UiAutomator2
 

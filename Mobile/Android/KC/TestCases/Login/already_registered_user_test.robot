@@ -32,34 +32,6 @@ TC-02 Verify User Can Request An Otp For Login
     Click On Request Otp Button
     Check Otp Screen
 
-TC-01 Verify Valid Indian Mobile Number
-    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   6
-    Verify Login Screen
-    Enter Mobile Number    ${login_data}
-    Click On Request Otp Button
-    Check Otp Screen
-
-TC-02 Verify User Can Request An Otp For Login
-    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   2
-    Verify Login Screen
-    Enter Mobile Number    ${login_data}
-    Click On Request Otp Button
-    Check Otp Screen
-
-TC-01 Verify Valid Indian Mobile Number
-    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   6
-    Verify Login Screen
-    Enter Mobile Number    ${login_data}
-    Click On Request Otp Button
-    Check Otp Screen
-
-TC-02 Verify User Can Request An Otp For Login
-    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   2
-    Verify Login Screen
-    Enter Mobile Number    ${login_data}
-    Click On Request Otp Button
-    Check Otp Screen
-
 
 #TC-03 Verify whether the OTP is delivered to the requested user within time
 #    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   11
@@ -99,12 +71,6 @@ TC-02 Verify User Can Request An Otp For Login
 #    Click On Request Otp Button
 #    Click And Verify Submit Button Is Disabled Without Accepting Terms & Conditions    ${login_data}
 #    Go Back
-
-TC_08 Verify Skip Button
-    Click And Verify Skip Button Before And After Otp Is Requested
-
-TC_08 Verify Skip Button
-    Click And Verify Skip Button Before And After Otp Is Requested
 
 TC_08 Verify Skip Button
     Click And Verify Skip Button Before And After Otp Is Requested

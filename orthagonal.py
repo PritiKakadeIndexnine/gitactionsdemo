@@ -181,7 +181,7 @@ ENV BROWSERSTACK_ACCESS_KEY=${{BROWSERSTACK_ACCESS_KEY}}
 ENV BROWSERSTACK_CONFIG_FILE="browserstack_android_{env_key}.yml"
 
 # Run the test
-CMD ["browserstack-sdk", "pabot", "Mobile/Android/KC/TestCases/Login/already_registered_user_test.robot"]
+CMD ["browserstack-sdk", "robot", "Mobile/Android/KC/TestCases/Login/already_registered_user_test.robot"]
     """
     file_output_path = os.path.join(dockerfiles_folder, output_file)
 

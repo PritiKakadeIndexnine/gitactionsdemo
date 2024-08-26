@@ -1,6 +1,4 @@
-web_dockerfiles\Dockerfile_web_1
-web_dockerfiles\Dockerfile_web_2
-web_dockerfiles\Dockerfile_web_3
-web_dockerfiles\Dockerfile_web_1
-web_dockerfiles\Dockerfile_web_2
-web_dockerfiles\Dockerfile_web_3
+d://oats\Execution-2024-08-26_20-41-33\web_dockerfiles\Dockerfile_web_1
+d://oats\Execution-2024-08-26_20-41-33\updated_env_web_1.json
+d://oats\Execution-2024-08-26_20-41-33\web_dockerfiles\Dockerfile_web_2
+d://oats\Execution-2024-08-26_20-41-33\updated_env_web_2.json

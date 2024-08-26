@@ -1,0 +1,10 @@
+[
+    {
+        "Browser": "Firefox",
+        "Env": "QA"
+    },
+    {
+        "Browser": "Edge",
+        "Env": "Staging"
+    }
+]

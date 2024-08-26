@@ -2,7 +2,7 @@
   "host":"http://127.0.0.1:4723",
   "platformName":"Android",
   "deviceName":"bae57ac0",
-  "application_sdk": "robot\\Mobile\\Android\\KC\\TestData\\Application\\app-debug.apk",
+  "application_sdk": "C:\\Users\\Priti\\Desktop\\git_demo\\gitactionsdemo\\Mobile\\Android\\KC\\TestData\\Application\\app-staging-debug.apk",
   "ignoreHiddenApiPolicyError":"true",
   "noReset":"false",
   "automationName":"UiAutomator2",

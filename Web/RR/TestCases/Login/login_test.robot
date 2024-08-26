@@ -4,7 +4,7 @@ Library      Collections
 Resource    ../../Resources/Login/login_keywords.robot
 Resource    ../../Resources/Profile/profile_keywords.robot
 Resource    ../../../../CommonBase/Cms/Resources/otp_keywords.robot
-Test Setup  Launch Application
+Test Setup  Launch Application New
 Test Teardown  Close Browser
 
 *** Variables ***

@@ -6,7 +6,7 @@ Resource    ../../Resources/Login/login_keywords.robot
 Resource    ../../Resources/Notification/notification_keywords.robot
 Library    ../../../../../CommonBase/Utilities/user_keywords.py
 Library    ../../PageObjects/Login/login_locators.py
-Test Setup  Open KC application
+Test Setup  Open Application On Lamda Test
 Test Teardown   Close Application
 
 *** Variables ***
@@ -19,18 +19,21 @@ ${already_registered_user_td}       ${CURDIR}${/}..${/}..${/}TestData${/}already
 
 
 TC-01 Verify Valid Indian Mobile Number
-    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   6
+    [Tags]  demo
+    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   1
     Verify Login Screen
     Enter Mobile Number    ${login_data}
     Click On Request Otp Button
     Check Otp Screen
 
 TC-02 Verify User Can Request An Otp For Login
-    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   2
+    [Tags]  demo
+    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   3
     Verify Login Screen
     Enter Mobile Number    ${login_data}
     Click On Request Otp Button
     Check Otp Screen
+
 
 #TC-03 Verify whether the OTP is delivered to the requested user within time
 #    &{login_data}   Fetch Data By Id    ${already_registered_user_td}   11
@@ -72,7 +75,9 @@ TC-02 Verify User Can Request An Otp For Login
 #    Go Back
 
 TC_08 Verify Skip Button
+    [Tags]  demo
     Click And Verify Skip Button Before And After Otp Is Requested
+
 
 #
 #TC-09 Verify the UI of the layout of OTP screen

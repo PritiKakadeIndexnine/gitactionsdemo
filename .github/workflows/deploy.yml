@@ -47,11 +47,11 @@ jobs:
         id: build-and-push
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: demo
+          ECR_REPOSITORY: new_repo
           IMAGE_TAG: ${{ github.sha }}
         run: |
           # Find all Dockerfiles in the repository
-          DOCKERFILES=$(find . -name 'Dockerfile*')
+          DOCKERFILES=$(find ./web_dockerfiles -name 'Dockerfile*')
           > image-uris.txt  # Clear or create a file to store image URIs
           
           # Loop through the Dockerfiles and build/push images
@@ -82,7 +82,7 @@ jobs:
 
       - name: Create Log Group
         run: |
-          aws logs create-log-group --log-group-name /ecs/my-task || true
+          aws logs create-log-group --log-group-name /ecs/new-task || true
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -90,7 +90,7 @@ jobs:
 
       - name: Create ECS Cluster
         run: |
-          aws ecs create-cluster --cluster-name my-cluster --region us-east-1 || true
+          aws ecs create-cluster --cluster-name new-cluster --region us-east-1 || true
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -99,10 +99,10 @@ jobs:
       - name: Register ECS Task Definition
         id: register-task-def
         run: |
-          CLUSTER_NAME=my-cluster
-          TASK_DEFINITION_NAME=my-task
+          CLUSTER_NAME=new-cluster
+          TASK_DEFINITION_NAME=new-task
 
-          DOCKERFILES=$(find . -name 'Dockerfile*')
+          DOCKERFILES=$(find ./web_dockerfiles  -name 'Dockerfile*')
           CONTAINERS_JSON=""
           PORT=8080  # Starting port for containerPort and hostPort
           CONTAINER_CPU=256  # CPU units for each container
@@ -170,9 +170,9 @@ jobs:
 
       - name: Create or Update ECS Service
         run: |
-          CLUSTER_NAME=my-cluster
-          SERVICE_NAME=my-service
-          TASK_DEFINITION_NAME=my-task
+          CLUSTER_NAME=new-cluster
+          SERVICE_NAME=new-service
+          TASK_DEFINITION_NAME=new-task
 
           # Check if the service already exists
           SERVICE_EXISTS=$(aws ecs describe-services --cluster $CLUSTER_NAME --services $SERVICE_NAME --query 'services[0].status' --output text --region us-east-1 2>/dev/null || echo "MISSING")

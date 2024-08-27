@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - git-actions-demo
-
+      
   workflow_dispatch:
 
 jobs:

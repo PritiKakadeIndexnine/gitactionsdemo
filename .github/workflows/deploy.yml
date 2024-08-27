@@ -175,9 +175,9 @@ jobs:
           TASK_DEFINITION_NAME=new-task
 
           # Check if the service already exists
-          SERVICE_EXISTS=$(aws ecs describe-services --cluster $CLUSTER_NAME --services $SERVICE_NAME --query 'services[0].status' --output text --region us-east-1 2>/dev/null || echo "MISSING")
+          SERVICE_EXISTS=$(aws ecs describe-services --cluster $CLUSTER_NAME --services $SERVICE_NAME --query 'failures[0].reason' --output text --region us-east-1 2>/dev/null)
 
-          if [ "$SERVICE_EXISTS" == "MISSING" ]; then
+          if [ "$SERVICE_EXISTS" == "MISSING" ] || [ "$SERVICE_EXISTS" == "null" ]; then
             # Create the service if it doesn't exist
             aws ecs create-service \
               --cluster $CLUSTER_NAME \

@@ -1,4 +1,4 @@
-set CLONE_PATH=C:\Users\Malay\Desktop\acctest\Execution-2024-09-05_15-05-03
+set CLONE_PATH=d://oats\Execution-2024-09-06_10-14-26
 cd /d %CLONE_PATH%
 cd runner
 rmdir /s /q allure-report

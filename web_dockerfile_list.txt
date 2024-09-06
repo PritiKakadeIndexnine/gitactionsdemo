@@ -1,4 +1,2 @@
-C:\Users\Malay\Desktop\acctest\Execution-2024-09-05_15-05-03\web_dockerfiles\Dockerfile_web_1
-C:\Users\Malay\Desktop\acctest\Execution-2024-09-05_15-05-03\updated_env_web_1.json
-C:\Users\Malay\Desktop\acctest\Execution-2024-09-05_15-05-03\web_dockerfiles\Dockerfile_web_2
-C:\Users\Malay\Desktop\acctest\Execution-2024-09-05_15-05-03\updated_env_web_2.json
+d://oats\Execution-2024-09-06_10-14-26\web_dockerfiles\Dockerfile_web_1
+d://oats\Execution-2024-09-06_10-14-26\updated_env_web_1.json

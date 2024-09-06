@@ -1,11 +1,12 @@
 data = {
     "URL": "",
-    "Environment": "staging",
-    "Browser": "null",
+    "Environment": "",
+    "Browser": "",
     "Options": [
-        "Git"
+        "Git",
+        "OATS"
     ],
-    "clone_path": "C:\\Users\\Malay\\Desktop\\acctest\\Execution-2024-09-05_15-05-03",
+    "clone_path": "d://oats\\Execution-2024-09-06_10-14-26",
     "EmailInput": [],
     "IPInput": []
 }

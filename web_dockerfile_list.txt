@@ -1,2 +1,4 @@
-d://oats\Execution-2024-09-06_10-14-26\web_dockerfiles\Dockerfile_web_1
-d://oats\Execution-2024-09-06_10-14-26\updated_env_web_1.json
+d://oats\Execution-2024-09-06_11-09-54\web_dockerfiles\Dockerfile_web_1
+d://oats\Execution-2024-09-06_11-09-54\updated_env_web_1.json
+d://oats\Execution-2024-09-06_11-09-54\web_dockerfiles\Dockerfile_web_2
+d://oats\Execution-2024-09-06_11-09-54\updated_env_web_2.json

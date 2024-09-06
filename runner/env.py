@@ -3,10 +3,9 @@ data = {
     "Environment": "",
     "Browser": "",
     "Options": [
-        "Git",
-        "OATS"
+        "Git"
     ],
-    "clone_path": "d://oats\\Execution-2024-09-06_10-14-26",
+    "clone_path": "d://oats\\Execution-2024-09-06_11-09-54",
     "EmailInput": [],
     "IPInput": []
 }
